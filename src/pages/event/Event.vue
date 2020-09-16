@@ -6,7 +6,6 @@
         <div class="text-subtitle2">2020年10月7日截止</div>
       </q-card-section>
     </q-card>
-    </router-link>
     <q-separator/>
     <q-card class="my-card" flat >
       <q-card-section>

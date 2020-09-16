@@ -4,12 +4,8 @@
 
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="left = !left" />
 
         <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
-          </q-avatar>
           Auntie Admin
         </q-toolbar-title>
       </q-toolbar>
@@ -24,15 +20,16 @@
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
-          </q-avatar>
-          Auntie
-        </q-toolbar-title>
-      </q-toolbar>
+    <q-footer elevated class="bg-primary text-white">
+      <q-tabs
+        v-model="tab"
+        align="justify"
+        outside-arrows
+        mobile-arrows
+      >
+        <q-route-tab default to="/eventList" name="events" icon="event" label="Events" />
+        <q-route-tab name="settings" to="" icon="settings" label="Settings" />
+      </q-tabs>
     </q-footer>
 
   </q-layout>

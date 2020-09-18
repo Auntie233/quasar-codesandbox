@@ -19,19 +19,11 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
-    <q-footer elevated class="bg-primary text-white">
-      <q-tabs
-        v-model="tab"
-        align="justify"
-        outside-arrows
-        mobile-arrows
-      >
-        <q-route-tab default to="/eventList" name="events" icon="event" label="Events" />
-        <q-route-tab name="settings" to="" icon="settings" label="Settings" />
-      </q-tabs>
+    <q-footer>
+      <q-toolbar>
+          <q-toolbar-title>管理平台</q-toolbar-title>
+        </q-toolbar>
     </q-footer>
-
   </q-layout>
 </template>
 

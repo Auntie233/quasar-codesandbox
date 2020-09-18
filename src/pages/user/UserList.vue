@@ -1,23 +1,56 @@
 <template>
   <div class="q-pa-md">
     <q-table
-      title="Treats"
+      title="用户列表"
       :data="data"
       :columns="columns"
       row-key="name"
-    />
+      selection="single"
+      :selected.sync="selected"
+      :filter="filter"
+    >
+    <template v-slot:top>
+      <div class="q-table__title">用户列表</div>
+      <q-space/>
+      <q-input label="请输入用户名" v-model="filter">
+      <template v-slot:append>
+        <q-icon name="search"/>
+      </template>
+      </q-input>
+      <user-info-dialog :dialog="dialog" :on-dialog-close="closeDialog"/>
+    </template>
+    <template v-slot:body-cell-action="props">
+      <q-td :props="props">
+        <q-btn @click="dialog=true">
+          编辑
+        </q-btn>
+      </q-td>
+    </template>
+    </q-table>
   </div>
 </template>
 
 <script>
+import userInfoDialog from './UserInfoDialog.vue'
 export default {
+  components: {
+    userInfoDialog
+  },
+  methods:{
+    closeDialog() {
+      this.dialog = false
+    }
+  },
   data () {
     return {
+      dialog: false,
+      filter: '',
+      selected: [],
       columns: [
         {
           name: 'name',
           required: true,
-          label: 'Dessert (100g serving)',
+          label: '用户名',
           align: 'left',
           field: row => row.name,
           format: val => `${val}`,
@@ -29,7 +62,8 @@ export default {
         { name: 'protein', label: 'Protein (g)', field: 'protein' },
         { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
         { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+        { name: 'action', label: '操作' ,align: 'center'}
       ],
       data: [
         {

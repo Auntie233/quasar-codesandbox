@@ -4,10 +4,22 @@
 
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
-
+        <q-btn
+          flat
+          dense
+          round
+          icon="menu"
+          aria-label="Menu"
+          @click="left = !left"
+        />
         <q-toolbar-title>
           Auntie Admin
         </q-toolbar-title>
+        <q-btn
+          flat
+          round
+          v-go-back="'/'"
+        >返回首页</q-btn>
       </q-toolbar>
     </q-header>
 

@@ -5,15 +5,21 @@
          :key="i"
         transition="scale"
          class="event-card ">
-    <q-card @click="toPage(event)">
+    <q-card >
       <q-card-section>
         <div class="text-h6">{{event.title}}</div>
         <div class="text-subtitle2">{{event.description}}</div>
       </q-card-section>
-
       <q-card-section>
         {{ event.description }}
       </q-card-section>
+
+      <q-separator />
+
+      <q-card-actions align="center">
+        <q-btn >编辑</q-btn>
+        <q-btn @click="toPage(event)" >参赛者列表</q-btn>
+      </q-card-actions>
     </q-card>
     </q-intersection>
   </div>
@@ -23,7 +29,7 @@
 export default {
   methods: {
     toPage(event) {
-      this.$router.push("/listTest")
+      this.$router.push("/contestantList")
     }
   },
   data(){

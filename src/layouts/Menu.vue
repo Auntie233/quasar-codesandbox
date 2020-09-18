@@ -26,7 +26,7 @@ export default {
                 {
                     icon: "person",
                     name:"用户管理",
-                    path:"/listTest"
+                    path:"/userList"
                 }
             ]
         }

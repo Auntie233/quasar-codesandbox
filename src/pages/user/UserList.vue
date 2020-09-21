@@ -4,8 +4,7 @@
       title="用户列表"
       :data="data"
       :columns="columns"
-      row-key="name"
-      selection="single"
+      row-key="id"
       :selected.sync="selected"
       :filter="filter"
       :pagination.sync="pagination"
@@ -56,6 +55,7 @@ export default {
               this.pagesNumber = resData.totalPages
               this.pagination.page = resData.number
               this.pagination.rowsNumber = resData.totalElements
+              console.info(this.data)
             }
           }
         }
@@ -80,29 +80,14 @@ export default {
       selected: [],
       columns: [
         {
-          name: 'id',
-          required: true,
-          label: '用户编号',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true
-        },
-        {
-          name: 'name',
+          name: 'username',
           label: '用户名',
           align: 'left',
-          field: row => row.name,
+          field: row => row.username,
           format: val => `${val}`,
           sortable: true
         },
         { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-        { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-        { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-        { name: 'protein', label: 'Protein (g)', field: 'protein' },
-        { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
-        { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
         { name: 'action', label: '操作' ,align: 'center'}
       ],
       data: []

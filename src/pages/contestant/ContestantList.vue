@@ -2,23 +2,23 @@
   <div class="q-pa-md">
       <q-intersection
         transition="scale">
-    <q-table
-      grid
-      title="参赛者列表"
-      :data="data"
-      :columns="columns"
-      row-key="name"
-      :filter="filter"
-      hide-header
-    >
-      <template v-slot:top-right>
-        <q-input dense debounce="300" v-model="filter" placeholder="Search">
-          <template v-slot:append>
-            <q-icon name="search" />
+        <q-table
+          grid
+          title="参赛者列表"
+          :data="data"
+          :columns="columns"
+          row-key="name"
+          :filter="filter"
+          hide-header
+        >
+          <template v-slot:top-right>
+            <q-input dense debounce="300" v-model="filter" placeholder="Search">
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </template>
-        </q-input>
-      </template>
-    </q-table>
+        </q-table>
       </q-intersection>
   </div>
 </template>

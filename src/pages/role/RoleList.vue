@@ -1,8 +1,7 @@
 <template>
   <div class="q-pa-md">
-    <!-- <div class="q-table__title">用户列表</div> -->
     <div class="q-gutter-md row items-start">
-        <q-input label="请输入用户名">
+        <q-input label="请输入角色名">
             <template v-slot:append>
               <q-icon name="search"/>
             </template>
@@ -11,8 +10,7 @@
       <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn fab icon="add" color="primary" @click="openNewDialog" />
       </q-page-sticky>
-      <user-info-dialog :dialog="userDialog" :userInfo="userInfoInPage" :onDialogClose="closeDialog"/>
-      <user-role-dialog :dialog="roleDialog" :userInfo="userInfoInPage" :onDialogClose="closeDialog"/>
+      <role-info-dialog :dialog="dialog" :roleInfo="roleInfoInPage" :onDialogClose="closeDialog"/>
     <q-table
       :data="data"
       :columns="columns"
@@ -22,11 +20,8 @@
     >
     <template v-slot:body-cell-action="props">
       <q-td :props="props">
-        <q-btn class="inner-btn" @click="openEditDialog(props)">
+        <q-btn @click="openEditDialog(props)">
           编辑
-        </q-btn>
-        <q-btn class="inner-btn" @click="openEditRoleDialog(props)">
-          分配
         </q-btn>
       </q-td>
     </template>
@@ -35,41 +30,27 @@
 </template>
 
 <script>
-import userInfoDialog from './UserInfoDialog.vue'
-import userRoleDialog from './UserRoleDialog.vue'
+import roleInfoDialog from './RoleInfoDialog.vue'
 export default {
   components: {
-    userInfoDialog,
-    userRoleDialog
+    roleInfoDialog
   },
   methods:{
     closeDialog() {
-      this.userDialog = false
+      this.dialog = false
       this.$router.go(0)
     },
     openNewDialog() {
-      this.userInfoInPage = {}
-      this.userDialog = !this.userDialog
+      this.roleInfoInPage = {}
+      this.dialog = !this.dialog
     },
     openEditDialog(scope) {
-      this.userInfoInPage = scope.row
-      this.userDialog = !this.userDialog
-    },
-    closeRoleDialog() {
-      this.roleDialog = false
-      this.$router.go(0)
-    },
-    openNewRoleDialog() {
-      this.userInfoInPage = {}
-      this.roleDialog = !this.roleDialog
-    },
-    openEditRoleDialog(scope) {
-      this.userInfoInPage = scope.row
-      this.roleDialog = !this.roleDialog
+      this.roleInfoInPage = scope.row
+      this.dialog = !this.dialog
     },
     loadData() {
       this.loading = true
-      this.$axios.get('/user/find', {
+      this.$axios.get('/role/find', {
         params: {
           page: this.pagination.page-1,
           size: this.pagination.rowsPerPage
@@ -104,30 +85,22 @@ export default {
         // rowsNumber: xx if getting data from a server
       },
       pagesNumber: 10,
-      userDialog: false,
-      roleDialog:false,
+      dialog: false,
       loading: false,
       columns: [
         {
-          name: 'username',
-          label: '用户名',
+          name: 'roleName',
+          label: '角色名',
           align: 'left',
-          field: row => row.username,
+          field: row => row.roleName,
           format: val => `${val}`,
           sortable: true
         },
-        { name: 'updateTime', align: 'center', label: '更新日期', field: 'updateTime', sortable: true },
         { name: 'action', label: '操作' ,align: 'center'}
       ],
       data: [],
-      userInfoInPage: {}
+      roleInfoInPage: {}
     }
   }
 }
 </script>
-
-<style scoped>
-.inner-btn{
-  margin-right: 10px;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md q-gutter-sm" >
+  <div class="q-pa-md q-gutter-sm">
     <q-dialog
       v-model="dialog"
       persistent
@@ -7,9 +7,9 @@
       transition-show="slide-up"
       transition-hide="slide-down"
     >
-      <q-card style="min-width:400px;">
+      <q-card>
         <q-bar class="bg-primary text-white">
-            <div >用户信息编辑</div>
+            <div >角色信息编辑</div>
           <q-space />
           <q-btn dense flat icon="minimize" @click="maximizedToggle = false" :disable="!maximizedToggle">
             <q-tooltip v-if="maximizedToggle" content-class="bg-white text-primary">Minimize</q-tooltip>
@@ -25,7 +25,7 @@
           <q-card class="q-pa-md q-pl-md" >
             <q-card-section>
               <q-form class="q-gutter-md row items-start">
-                  <q-input placeholder="请输入用户名" v-model="userInfo.username" label="用户名" stack-label/>
+                  <q-input placeholder="请输入角色名" v-model="roleInfo.roleName" label="角色名" stack-label/>
               </q-form>
             </q-card-section>
             <q-separator />
@@ -47,7 +47,7 @@ export default {
     props: {
         dialog: Boolean,
         onDialogClose: Function,
-        userInfo: Object
+        roleInfo: Object
     },
   data () {
     return {
@@ -56,7 +56,8 @@ export default {
   },
   methods:{
     onSubmit() {
-      this.$axios.post('/user/save', this.userInfo).then(
+      console.info(this.roleInfo)
+      this.$axios.post('/role/save', this.roleInfo).then(
         (response) => {
           if(response.status==200) {
             if (response.data.success) {

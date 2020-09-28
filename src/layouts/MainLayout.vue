@@ -24,7 +24,6 @@
     </q-header>
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
-      <!-- drawer content -->
       <menu-list/>
     </q-drawer>
 

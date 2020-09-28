@@ -9,7 +9,7 @@
     >
       <q-card style="min-width:400px;">
         <q-bar class="bg-primary text-white">
-            <div >用户信息编辑</div>
+            <div >角色分配</div>
           <q-space />
           <q-btn dense flat icon="minimize" @click="maximizedToggle = false" :disable="!maximizedToggle">
             <q-tooltip v-if="maximizedToggle" content-class="bg-white text-primary">Minimize</q-tooltip>
@@ -25,7 +25,8 @@
           <q-card class="q-pa-md q-pl-md" >
             <q-card-section>
               <q-form class="q-gutter-md row items-start">
-                  <q-input placeholder="请输入用户名" v-model="userInfo.username" label="用户名" stack-label/>
+                  <q-input disable v-model="userInfo.username" label="用户名" stack-label/>
+                  <q-select clearable filled v-model="model" :options="options" label="Label" />
               </q-form>
             </q-card-section>
             <q-separator />
